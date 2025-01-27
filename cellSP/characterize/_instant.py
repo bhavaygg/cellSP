@@ -12,7 +12,7 @@ import timeit
 import random
 from datetime import timedelta
 from sklearn.utils import check_array
-def run_instant(adata_st, distance_threshold, threads, n_vertices, alpha_cpb = 0.001, alpha_fsm = 0.001, filename = None, remove_file = True, is_sliced = True):
+def run_instant(adata_st, distance_threshold, threads, n_vertices = None, alpha_cpb = 0.001, alpha_fsm = 0.001, filename = None, remove_file = True, is_sliced = True):
     '''
     Run Instant on the spatial data to find colocalized gene pairs.
     Arguments
@@ -51,7 +51,8 @@ def run_instant(adata_st, distance_threshold, threads, n_vertices, alpha_cpb = 0
     else:
         obj.run_ProximalPairs(distance_threshold = distance_threshold, min_genecount = 20)
     obj.run_GlobalColocalization(high_precision = True, alpha_cellwise = alpha_cpb)
-    obj.run_fsm(n_vertices = n_vertices, alpha = alpha_fsm)
+    if n_vertices != None:
+        obj.run_fsm(n_vertices = n_vertices, alpha = alpha_fsm)
     adata_st = read_h5ad(filename)
     if remove_file:
         subprocess.run(["rm", filename])
@@ -114,7 +115,6 @@ def bicluster_instant(adata_st, distance_threshold, num_biclusters = 10, randomi
     if 'cpb_results' in adata_st.uns.keys():
         cpb_results = adata_st.uns['cpb_results'].reset_index()
         cpb_results = cpb_results[cpb_results.p_val_cond <= alpha]
-        print(cpb_results.shape)
         if topk != None:
             cpb_results = cpb_results.iloc[:topk]
     else:

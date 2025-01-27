@@ -90,7 +90,6 @@ def extrapolate(adata_sc, adata_st, alpha=0.1, **kwargs):
 
 
 def _parallelize_training(args):
-    print("allo")
     gene, n_genes, g_position_sc, g_position_st, overlap_genes, r2 = args[0], args[1], args[2], args[3], args[4], args[5]
     sc_X_local = np.frombuffer(sc_X).reshape(sc_X_shape)
     other_genes_sc = list(range(n_genes))

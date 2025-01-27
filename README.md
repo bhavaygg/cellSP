@@ -1,4 +1,4 @@
-# CellSP
+BOX# CellSP
 __Note: Repository is work in progress__
 <br>
 <br>
@@ -22,8 +22,6 @@ Alternatively, the package can be installed using pip.
 ```
 pip install cellSP
 ```
-
-__Note: Not operational as of now__
 
 ***
 ## How to use CellSP
@@ -112,6 +110,14 @@ To help visualize modules defined by the five types of subcellular spatial patte
 
 ![CellSP_visualizations](https://github.com/bhavaygg/CellSP/blob/main/figures/CellSP_visualizations.png)
 
+
+SPRAWL identifies spatial localization patterns (peripheral, central, radial, or punctate) for each gene in individual cells. CellSP aggregates these patterns across cells by representing each cell within a standardized unit circle, enabling comparative analyses.
+
+For “central” and “peripheral” patterns, gene densities are averaged across concentric rings of the circle, revealing expected trends: higher densities in the innermost rings for central patterns and in the outermost rings for peripheral patterns.
+
+For “punctate” and “radial” patterns, the circle is divided into sectors, and densities are aligned to highlight directional concentration. Module genes are expected to cluster in specific sectors, while non-module genes display uniform distributions.
+
+InSTAnT identifies colocalized gene pairs based on their spatial proximity. A proximity enrichment score compares the colocalization of gene pairs in module cells versus non-module cells. Visualization includes heatmaps showing enrichment scores for module and control genes, highlighting patterns of colocalization and contrasting them with non-module gene behavior.
 ***
 
 ### How to cite CellSP
